@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Click the Button Game</title>
+  <style>
+    /* Add some basic styling to our game canvas */
+    #game-canvas {
+      width: 400px;
+      height: 400px;
+      border: 1px solid black;
+      position: relative;
+    }
+    #button {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-canvas">
+    <button id="button">Click me!</button>
+    <p id="scoreboard">Score: 0</p>
+  </div>
+  <script>
+    // Get the game elements
+    const gameCanvas = document.getElementById("game-canvas");
+    const button = document.getElementById("button");
+    const scoreboard = document.getElementById("scoreboard");
+
+    // Generate a random location for the button
+    function getRandomLocation() {
+      const x = Math.floor(Math.random() * gameCanvas.offsetWidth);
+      const y = Math.floor(Math.random() * gameCanvas.offsetHeight);
+      return { x, y };
+    }
+
+    // Update the button's location
+    function updateButtonLocation() {
+      const { x, y } = getRandomLocation();
+      button.style.top = `${y}px`;
+      button.style.left = `${x}px`;
+    }
+
+    // Increment the score when the button is clicked
+    function incrementScore() {
+      const currentScore = parseInt(scoreboard.textContent.split(": ")[1]);
+      scoreboard.textContent = `Score: ${currentScore + 1}`;
+    }
+
+    // Add event listener to the button
+    button.addEventListener("click", () => {
+      updateButtonLocation();
+      incrementScore();
+    });
+
+    // Initialize the game
+    updateButtonLocation();
+  </script>
+</body>
+</html>
